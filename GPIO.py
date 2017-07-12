@@ -6,7 +6,7 @@ import requests
 
 def SendAlartFun(channel):
     try:
-        resp = requests.get(nti_url+'?ambulance_id={0}'.format(id), timeout=2.001)
+        resp = requests.get(nti_url+'car_id={0}'.format(id), timeout=2.001)
         print ('content     ' + resp.content) 
     except:
         print 'SendAlartFun Connection lost'

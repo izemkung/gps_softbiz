@@ -83,12 +83,12 @@ if __name__ == '__main__':
       print 'latitude    ' , gpsd.fix.latitude
       print 'longitude   ' , gpsd.fix.longitude
       print 'time utc    ' , gpsd.utc,' + ', gpsd.fix.time
-      print  gps_url,'?ambulance_id={0}&tracking_latitude={1:.6f}&tracking_longitude={2:.6f}&tracking_speed={3:.2f}'.format(id,gpsd.fix.latitude,gpsd.fix.longitude,gpsd.fix.speed)
+      print  gps_url,'track_latitude={1:.6f}&track_longitude={2:.6f}&track_speed={3:.2f}&car_id={0}'.format(gpsd.fix.latitude,gpsd.fix.longitude,gpsd.fix.speed,id)
       
       if str(gpsd.fix.latitude) != 'nan' and str(gpsd.fix.latitude) != '0.0':
         GPIO.output(22,True)
         try:
-          resp = requests.get(gps_url+'?ambulance_id={0}&tracking_latitude={1:.6f}&tracking_longitude={2:.6f}&tracking_speed={3:.2f}'.format(id,gpsd.fix.latitude,gpsd.fix.longitude,gpsd.fix.speed), timeout=1.001)
+          resp = requests.get(gps_url+'track_latitude={1:.6f}&track_longitude={2:.6f}&track_speed={3:.2f}&car_id={0}'.format(gpsd.fix.latitude,gpsd.fix.longitude,gpsd.fix.speed,id), timeout=1.001)
           #print 'status_code ' , resp.status_code
           #print 'headers     ' , resp.headers
           print 'content     ' , resp.content
