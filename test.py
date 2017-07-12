@@ -12,11 +12,17 @@ import sys
 import subprocess
 
 #===================================================Update FW Version================================
-vercurrent = subprocess.check_output('sudo rm /home/pi/usb/pic/ch0/*.jpg', shell=True)
-print vercurrent
-print '0 >'+ vercurrent.split(':')[0]
-print '1 >'+ vercurrent.split(':')[1]
-print '2 >'+ vercurrent.split(':')[2]
-if vercurrent == '' :
-    print 'isOK' + vercurrent
+
+vercurrent = subprocess.check_output('git rev-parse --verify HEAD', shell=True)
+print 'Cur ver ' + vercurrent
+
+vergit =  subprocess.check_output('git ls-remote https://github.com/izemkung/gps_softbiz | head -1 | cut -f 1', shell=True)
+print 'Git ver '+ vergit
+if vergit == vercurrent :
+    print "version FW Ok!!!"
+if vergit != vercurrent and len(vercurrent) == len(vergit):
+    print "Download FW "
+if vergit == vercurrent and len(vercurrent) == len(vergit):
+    print "version FW Ok!!! and len ok"
+
 
